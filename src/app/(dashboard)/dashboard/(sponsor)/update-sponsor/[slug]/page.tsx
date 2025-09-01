@@ -47,7 +47,7 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
   const [metaDataHistory, setMetaDataHistory] = useState(
     getInitialMetaDataHistory
   );
-  const [handleUpdateSponsor, { isLoading, error }] =
+  const [handleUpdate, { isLoading, error }] =
     useHandleUpdateSponsorMutation();
   const router = useRouter();
 
@@ -85,7 +85,7 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
       };
 
       console.log({ payload });
-      await handleUpdateSponsor({ id, payload }).unwrap();
+      await handleUpdate({ id, payload }).unwrap();
       toast.success("Data updated successfully!");
       router.push("/dashboard/manage-sponsor");
     } catch (error: any) {

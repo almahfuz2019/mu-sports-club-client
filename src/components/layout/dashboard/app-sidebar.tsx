@@ -100,6 +100,24 @@ const data = {
       ],
     },
     {
+      title: "Player",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Player",
+          url: "/dashboard/add-player",
+          icon: Building2,
+        },
+        {
+          title: "Manage Player",
+          url: "/dashboard/manage-player",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Contact",
       url: "#",
       icon: Building,

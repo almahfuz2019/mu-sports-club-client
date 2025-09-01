@@ -29,7 +29,6 @@ import {
 // Icons
 import {
   CalendarDays,
-  Eye,
   MoreHorizontal,
   Trash2,
   Undo2,
@@ -38,7 +37,6 @@ import {
 } from "lucide-react";
 import { TableProps } from "../type";
 import GlobalDelete from "@/components/layout/dashboard/shared/DeleteGlobal/GlobalDelete";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function ManageTable({
@@ -70,7 +68,8 @@ export default function ManageTable({
           </TableHead>
           <TableHead>Image</TableHead>
           <TableHead>Title</TableHead>
-          <TableHead>Link</TableHead>
+          <TableHead>Designation</TableHead>
+          <TableHead>Logo</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Create Date</TableHead>
           <TableHead className="text-right">Action</TableHead>
@@ -121,7 +120,7 @@ export default function ManageTable({
 
               <TableCell>
                 <Image
-                  src={item.logo}
+                  src={item.image}
                   alt={item.title}
                   width={100}
                   height={100}
@@ -133,19 +132,17 @@ export default function ManageTable({
                 {item.title}
               </TableCell>
               <TableCell>
-                <Link
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    variant="ghost"
-                    className="text-blue-600 hover:text-blue-800 mt-1 hover:bg-transparent"
-                  >
-                    <Eye />
-                    View
-                  </Button>
-                </Link>
+                <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />
+                {item.designation}
+              </TableCell>
+              <TableCell>
+                <Image
+                  src={item.logo}
+                  alt={item.title}
+                  width={100}
+                  height={100}
+                  className="object-cover h-10 w-20 rounded"
+                />
               </TableCell>
               <TableCell className="capitalize">
                 <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />
@@ -168,7 +165,7 @@ export default function ManageTable({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <Link
-                      href={`/dashboard/update-sponsor/${item.slug}`}
+                      href={`/dashboard/update-player/${item.slug}`}
                       className="flex items-center gap-2 text-blue-600 p-2 hover:bg-blue-50"
                     >
                       <UserCog className="w-4 h-4" />

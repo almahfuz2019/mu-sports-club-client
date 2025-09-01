@@ -12,7 +12,7 @@ import { GlobalAICommandInput } from "@/components/layout/dashboard/shared/input
 import { Form } from "@/components/ui/form";
 import { IFormInput } from "../type";
 import { fieldConfig } from "../fieldConfig";
-import { useHandleCreateSponsorMutation } from "@/Redux/features/sponsor/sponsorApi";
+import { useHandleCreatePlayerMutation } from "@/Redux/features/player/playerApi";
 
 const getInitialMetaData = () => {
   return fieldConfig.reduce((acc, field) => {
@@ -42,8 +42,7 @@ const AddPage = () => {
     getInitialMetaDataHistory
   );
 
-  const [handleCreate, { isLoading, error }] =
-    useHandleCreateSponsorMutation();
+  const [handleCreate, { isLoading, error }] = useHandleCreatePlayerMutation();
   const router = useRouter();
 
   const [historyModal, setHistoryModal] = useState<{
@@ -62,10 +61,9 @@ const AddPage = () => {
     try {
       const payload = {
         title: metaData?.title,
-        link: metaData?.link,
+        designation: metaData?.designation,
+        image: metaData?.image[0],
         logo: metaData?.logo[0],
-        metaSeoTags: metaData?.metaSeoTags,
-        metaSeoDescription: metaData?.metaSeoDescription,
       };
 
       console.log({ payload });
@@ -73,7 +71,7 @@ const AddPage = () => {
       await handleCreate(payload).unwrap();
 
       toast.success("Data added successfully!");
-      router.push("/dashboard/manage-sponsor");
+      router.push("/dashboard/manage-player");
     } catch (error: any) {
       console.error("Error adding:", error);
 
@@ -90,8 +88,8 @@ const AddPage = () => {
   return (
     <div>
       <Heading
-        title="Add Sponsor"
-        subTitle="Enter information to add a new Sponsor to the list."
+        title="Add Player"
+        subTitle="Enter information to add a new Player to the list."
       />
       <Form {...methods}>
         <form
@@ -114,7 +112,7 @@ const AddPage = () => {
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isLoading ? "Please Wait..." : "Add Sponsor"}
+            {isLoading ? "Please Wait..." : "Add Player"}
           </Button>
 
           <GlobalAICommandInput
