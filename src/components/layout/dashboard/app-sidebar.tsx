@@ -154,6 +154,24 @@ const data = {
       ],
     },
     {
+      title: "Performer",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Performer",
+          url: "/dashboard/add-performer",
+          icon: Building2,
+        },
+        {
+          title: "Manage Performer",
+          url: "/dashboard/manage-performer",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Contact",
       url: "#",
       icon: Building,
