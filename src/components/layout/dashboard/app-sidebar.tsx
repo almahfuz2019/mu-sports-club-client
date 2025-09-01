@@ -64,6 +64,24 @@ const data = {
       ],
     },
     {
+      title: "Event",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Event",
+          url: "/dashboard/add-event",
+          icon: Building2,
+        },
+        {
+          title: "Manage Event",
+          url: "/dashboard/manage-event",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Event Category",
       url: "#",
       icon: Building,
