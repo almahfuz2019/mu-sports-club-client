@@ -1,7 +1,6 @@
 "use client";
-
-import React, { useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Heading from "@/components/layout/dashboard/shared/heading";
 import { Button } from "@/components/ui/button";
 import GlobalHistoryModal from "@/components/layout/dashboard/shared/GlobalHistoryModal/GlobalHistoryModal";
@@ -9,19 +8,15 @@ import GlobalFieldRenderer from "@/components/layout/dashboard/shared/GlobalFiel
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { GlobalAICommandInput } from "@/components/layout/dashboard/shared/inputs/GlobalAICommandInput/GlobalAICommandInput";
-import { Form, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { IFormInput } from "../type";
-import { fieldConfig } from "../fieldConfig";
+import { Form } from "@/components/ui/form";
+import { ParamsSlug } from "@/Type/IFields";
+import { IFormInput } from "../../type";
+import { fieldConfig } from "../../fieldConfig";
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useHandleCreateVideoMutation } from "@/Redux/features/video/videoApi";
+  useHandleFindSingleSponsorQuery,
+  useHandleUpdateSponsorMutation,
+} from "@/Redux/features/sponsor/sponsorApi";
 
 const getInitialMetaData = () => {
   return fieldConfig.reduce((acc, field) => {
@@ -45,62 +40,86 @@ const getInitialMetaDataHistory = () => {
   }, {} as Record<string, any>);
 };
 
-const AddPage = () => {
+const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
+  const [slug, setSlug] = useState<string>("");
+  const [id, setId] = useState<string>("");
   const [metaData, setMetaData] = useState(getInitialMetaData);
   const [metaDataHistory, setMetaDataHistory] = useState(
     getInitialMetaDataHistory
   );
-
-  const [handleCreateVideo, { isLoading, error }] =
-    useHandleCreateVideoMutation();
+  const [handleUpdateSponsor, { isLoading, error }] =
+    useHandleUpdateSponsorMutation();
   const router = useRouter();
+
+  console.log({ error });
 
   const [historyModal, setHistoryModal] = useState<{
     open: boolean;
     field: any;
-  }>({
-    open: false,
-    field: null,
-  });
+  }>({ open: false, field: null });
 
-  const defaultValues = getInitialMetaData();
+  const { data } = useHandleFindSingleSponsorQuery(slug);
+  useEffect(() => {
+    const resolveParams = async () => {
+      const resolvedParams = await params;
+      setSlug(resolvedParams.slug);
+    };
+    resolveParams();
+  }, [params]);
+
+  const defaultValues = fieldConfig.reduce((acc, field) => {
+    if (field.formType === "array") acc[field.valueKey] = [];
+    else acc[field.valueKey] = "";
+    return acc;
+  }, {} as Record<string, any>);
 
   const methods = useForm<IFormInput>({ defaultValues });
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async () => {
     try {
       const payload = {
         title: metaData?.title,
         link: metaData?.link,
         duration: metaData?.duration,
-        isPaid: data?.isPaid, // now a boolean
-        metaSeoTags: metaData?.metaSeoTags,
-        metaSeoDescription: metaData?.metaSeoDescription,
+        logo: metaData?.logo[0],
       };
 
       console.log({ payload });
-
-      await handleCreateVideo(payload).unwrap();
-
-      toast.success("Data added successfully!");
-      router.push("/dashboard/manage-video");
+      await handleUpdateSponsor({ id, payload }).unwrap();
+      toast.success("Data updated successfully!");
+      router.push("/dashboard/manage-sponsor");
     } catch (error: any) {
-      console.error("Error adding:", error);
-
-      const apiErrorMessage =
-        error?.data?.payload[0]?.message ||
-        "Something went wrong. Please try again.";
-
-      toast.error(apiErrorMessage);
+      console.error({ error });
+      toast.error(error?.data?.payload?.message || "An error occurred");
     }
   };
 
-  console.log({ error });
+  console.log(data);
+
+  useEffect(() => {
+    if (data?.payload) {
+      const payload = data.payload;
+      const newData = {
+        title: payload.title || "",
+        link: payload.link || "",
+        logo: Array.isArray(payload.logo)
+          ? payload.logo
+          : payload.logo
+          ? [payload.logo]
+          : [],
+      };
+      setMetaData(newData);
+      setMetaDataHistory(newData);
+      methods.reset(newData);
+      setId(payload._id);
+    }
+  }, [data, methods]);
+
   return (
     <div>
       <Heading
-        title="Add Video"
-        subTitle="Enter information to add a new Video to the list."
+        title="Update Sponsor"
+        subTitle="Edit the details of an existing sponsor."
       />
       <Form {...methods}>
         <form
@@ -115,42 +134,6 @@ const AddPage = () => {
             setHistoryModal={setHistoryModal}
             setMetaDataHistory={setMetaDataHistory}
           />
-          <FormItem className="mb-4">
-            <FormLabel>Paid</FormLabel>
-            <Controller
-              name="isPaid"
-              control={methods.control}
-              rules={{
-                validate: (value) =>
-                  value === true || value === false
-                    ? true
-                    : "Paid status is required",
-              }}
-              render={({ field, fieldState }) => (
-                <>
-                  <Select
-                    value={
-                      typeof field.value === "boolean"
-                        ? String(field.value)
-                        : ""
-                    }
-                    onValueChange={(value) => field.onChange(value === "true")}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Paid Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="true">Paid</SelectItem>
-                        <SelectItem value="false">Unpaid</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage>{fieldState.error?.message}</FormMessage>
-                </>
-              )}
-            />
-          </FormItem>
 
           <Button
             type="submit"
@@ -159,7 +142,7 @@ const AddPage = () => {
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isLoading ? "Please Wait..." : "Add Video"}
+            {isLoading ? "Please Wait..." : "Update Sponsor"}
           </Button>
 
           <GlobalAICommandInput
@@ -171,7 +154,6 @@ const AddPage = () => {
           />
         </form>
       </Form>
-
       <GlobalHistoryModal
         historyModal={historyModal}
         metaData={metaData}
@@ -184,4 +166,4 @@ const AddPage = () => {
   );
 };
 
-export default AddPage;
+export default UpdatePage;

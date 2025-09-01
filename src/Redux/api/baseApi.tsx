@@ -46,7 +46,7 @@ export const baseQueryWithReAuth: BaseQueryFn<
 const Api = createApi({
   reducerPath: "immigrationApi",
   baseQuery: baseQueryWithReAuth,
-  tagTypes: ["EventCategory", "Blog", "Video", "UpcomingShow", "Contact"], // ✅ MUST BE PRESENT
+  tagTypes: ["EventCategory", "Sponsor", "Video", "UpcomingShow", "Contact"], // ✅ MUST BE PRESENT
   endpoints: () => ({}),
 });
 

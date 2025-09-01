@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Heading from "@/components/layout/dashboard/shared/heading";
 import { Button } from "@/components/ui/button";
 import GlobalHistoryModal from "@/components/layout/dashboard/shared/GlobalHistoryModal/GlobalHistoryModal";
@@ -9,19 +9,10 @@ import GlobalFieldRenderer from "@/components/layout/dashboard/shared/GlobalFiel
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { GlobalAICommandInput } from "@/components/layout/dashboard/shared/inputs/GlobalAICommandInput/GlobalAICommandInput";
-import { Form, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { IFormInput } from "../type";
 import { fieldConfig } from "../fieldConfig";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useHandleCreateVideoMutation } from "@/Redux/features/video/videoApi";
+import { useHandleCreateSponsorMutation } from "@/Redux/features/sponsor/sponsorApi";
 
 const getInitialMetaData = () => {
   return fieldConfig.reduce((acc, field) => {
@@ -51,8 +42,8 @@ const AddPage = () => {
     getInitialMetaDataHistory
   );
 
-  const [handleCreateVideo, { isLoading, error }] =
-    useHandleCreateVideoMutation();
+  const [handleCreateSponsor, { isLoading, error }] =
+    useHandleCreateSponsorMutation();
   const router = useRouter();
 
   const [historyModal, setHistoryModal] = useState<{
@@ -67,23 +58,22 @@ const AddPage = () => {
 
   const methods = useForm<IFormInput>({ defaultValues });
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async () => {
     try {
       const payload = {
         title: metaData?.title,
         link: metaData?.link,
-        duration: metaData?.duration,
-        isPaid: data?.isPaid, // now a boolean
+        logo: metaData?.logo[0],
         metaSeoTags: metaData?.metaSeoTags,
         metaSeoDescription: metaData?.metaSeoDescription,
       };
 
       console.log({ payload });
 
-      await handleCreateVideo(payload).unwrap();
+      await handleCreateSponsor(payload).unwrap();
 
       toast.success("Data added successfully!");
-      router.push("/dashboard/manage-video");
+      router.push("/dashboard/manage-sponsor");
     } catch (error: any) {
       console.error("Error adding:", error);
 
@@ -96,11 +86,12 @@ const AddPage = () => {
   };
 
   console.log({ error });
+
   return (
     <div>
       <Heading
-        title="Add Video"
-        subTitle="Enter information to add a new Video to the list."
+        title="Add Sponsor"
+        subTitle="Enter information to add a new Sponsor to the list."
       />
       <Form {...methods}>
         <form
@@ -115,42 +106,6 @@ const AddPage = () => {
             setHistoryModal={setHistoryModal}
             setMetaDataHistory={setMetaDataHistory}
           />
-          <FormItem className="mb-4">
-            <FormLabel>Paid</FormLabel>
-            <Controller
-              name="isPaid"
-              control={methods.control}
-              rules={{
-                validate: (value) =>
-                  value === true || value === false
-                    ? true
-                    : "Paid status is required",
-              }}
-              render={({ field, fieldState }) => (
-                <>
-                  <Select
-                    value={
-                      typeof field.value === "boolean"
-                        ? String(field.value)
-                        : ""
-                    }
-                    onValueChange={(value) => field.onChange(value === "true")}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Paid Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="true">Paid</SelectItem>
-                        <SelectItem value="false">Unpaid</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage>{fieldState.error?.message}</FormMessage>
-                </>
-              )}
-            />
-          </FormItem>
 
           <Button
             type="submit"
@@ -159,7 +114,7 @@ const AddPage = () => {
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isLoading ? "Please Wait..." : "Add Video"}
+            {isLoading ? "Please Wait..." : "Add Sponsor"}
           </Button>
 
           <GlobalAICommandInput
