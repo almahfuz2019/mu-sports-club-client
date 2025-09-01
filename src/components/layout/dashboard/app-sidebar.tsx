@@ -82,6 +82,24 @@ const data = {
       ],
     },
     {
+      title: "Notice",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Notice",
+          url: "/dashboard/add-notice",
+          icon: Building2,
+        },
+        {
+          title: "Manage Notice",
+          url: "/dashboard/manage-notice",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Sponsor",
       url: "#",
       icon: Building,
