@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Heading from "@/components/layout/dashboard/shared/heading";
 import { Button } from "@/components/ui/button";
 import GlobalHistoryModal from "@/components/layout/dashboard/shared/GlobalHistoryModal/GlobalHistoryModal";
@@ -8,19 +8,11 @@ import GlobalFieldRenderer from "@/components/layout/dashboard/shared/GlobalFiel
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { GlobalAICommandInput } from "@/components/layout/dashboard/shared/inputs/GlobalAICommandInput/GlobalAICommandInput";
-import { Form, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { ParamsSlug } from "@/Type/IFields";
 import { IFormInput } from "../../type";
 import { fieldConfig } from "../../fieldConfig";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   useHandleFindSingleVideoQuery,
   useHandleUpdateVideoMutation,
@@ -83,13 +75,10 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
 
   const methods = useForm<IFormInput>({ defaultValues });
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async () => {
     try {
       const payload = {
-        title: metaData?.title,
         link: metaData?.link,
-        duration: metaData?.duration,
-        isPaid: data?.isPaid, // now a boolean
         metaSeoTags: metaData?.metaSeoTags,
         metaSeoDescription: metaData?.metaSeoDescription,
       };
@@ -110,14 +99,9 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
     if (data?.payload) {
       const payload = data.payload;
       const newData = {
-        title: payload.title || "",
         link: payload.link || "",
-        duration: payload.duration || "",
-        isPaid: payload.isPaid || false,
         metaSeoTags: payload.metaSeoTags || [],
         metaSeoDescription: payload.metaSeoDescription || "",
-        date: payload.date || "",
-        type: payload.type || "",
       };
       setMetaData(newData);
       setMetaDataHistory(newData);
@@ -145,43 +129,6 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
             setHistoryModal={setHistoryModal}
             setMetaDataHistory={setMetaDataHistory}
           />
-
-          <FormItem className="mb-4">
-            <FormLabel>Paid</FormLabel>
-            <Controller
-              name="isPaid"
-              control={methods.control}
-              rules={{
-                validate: (value) =>
-                  value === true || value === false
-                    ? true
-                    : "Paid status is required",
-              }}
-              render={({ field, fieldState }) => (
-                <>
-                  <Select
-                    value={
-                      typeof field.value === "boolean"
-                        ? String(field.value)
-                        : ""
-                    }
-                    onValueChange={(value) => field.onChange(value === "true")}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Paid Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="true">Paid</SelectItem>
-                        <SelectItem value="false">Unpaid</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage>{fieldState.error?.message}</FormMessage>
-                </>
-              )}
-            />
-          </FormItem>
 
           <Button
             type="submit"

@@ -1,12 +1,9 @@
 // Types
 export interface IData {
   _id: string;
-  title: string;
   slug: string;
-  duration: string;
   link: string;
   status: "pending" | "published";
-  isPaid: boolean;
   isTrash: boolean;
   metaSeoTags: string[];
   metaSeoDescription: string;
@@ -16,10 +13,7 @@ export interface IData {
 
 // Types
 export interface IFormInput {
-  title: string;
-  duration: string; // Can be a rich text string or JSON
   link: string;
-  isPaid: boolean;
   metaSeoTags: string[];
   metaSeoDescription: string;
 }

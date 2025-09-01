@@ -20,7 +20,6 @@ const ManagePage = () => {
   const [limit, setLimit] = useState(10);
   const searchRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
-  const [isPaid, setIsPaid] = useState<boolean | null>(null);
   const [statusForUpdate, setStatusForUpdate] = useState("");
   const [selectedData, setSelectedData] = useState<string[]>([]);
   const [isTrash, setIsTrash] = useState<boolean>(false);
@@ -36,7 +35,6 @@ const ManagePage = () => {
     search: searchText,
     status,
     isTrash,
-    isPaid,
   });
 
   const [handleUpdateVideoStatus, { isLoading: isUpdatingStatus }] =
@@ -133,8 +131,6 @@ const ManagePage = () => {
     window.open(url, "_blank");
   };
 
-  console.log({ type: isPaid });
-
   return (
     <div>
       <Filters
@@ -165,23 +161,8 @@ const ManagePage = () => {
           </Button>
         ))}
       </div>
-      <div className="flex flex-wrap gap-2 my-5">
-        {[
-          { label: "All", value: null },
-          { label: "Unpaid", value: false },
-          { label: "Paid", value: true },
-        ].map(({ label, value }) => (
-          <Button
-            key={label}
-            variant={isPaid === value ? "default" : "secondary"}
-            onClick={() => setIsPaid(value)}
-          >
-            {label}
-          </Button>
-        ))}
-      </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 mt-5">
         {["All", "Published", "Pending"].map((label) => {
           const value = label === "All" ? "" : label.toLowerCase();
           const isActive = status === value && !isTrash;

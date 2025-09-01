@@ -208,6 +208,24 @@ const data = {
       ],
     },
     {
+      title: "Video",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Video",
+          url: "/dashboard/add-video",
+          icon: Building2,
+        },
+        {
+          title: "Manage Video",
+          url: "/dashboard/manage-video",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Stats",
       url: "#",
       icon: Building,

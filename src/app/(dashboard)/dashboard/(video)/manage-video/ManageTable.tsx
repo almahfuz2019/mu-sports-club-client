@@ -30,7 +30,6 @@ import {
 import {
   CalendarDays,
   Eye,
-  Info,
   MoreHorizontal,
   Trash2,
   Undo2,
@@ -68,10 +67,7 @@ export default function ManageTable({
           <TableHead className="w-[20px]">
             <Checkbox checked={allSelected} onCheckedChange={handleSelectAll} />
           </TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Duration</TableHead>
           <TableHead>Link</TableHead>
-          <TableHead>Paid</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Create Date</TableHead>
           <TableHead className="text-right">Action</TableHead>
@@ -119,15 +115,6 @@ export default function ManageTable({
                   onCheckedChange={() => handleSelect(item._id)}
                 />
               </TableCell>
-
-              <TableCell>
-                <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />
-                {item.title}
-              </TableCell>
-              <TableCell>
-                <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />
-                {item.duration}
-              </TableCell>
               <TableCell>
                 <Link
                   href={item.link}
@@ -144,10 +131,6 @@ export default function ManageTable({
                 </Link>
               </TableCell>
 
-              <TableCell>
-                <Info className="w-4 h-4 text-blue-600 inline mr-1" />
-                {item.isPaid ? "Paid" : "Unpaid"}
-              </TableCell>
               <TableCell className="capitalize">
                 <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />
                 {item.status}
@@ -272,7 +255,7 @@ export default function ManageTable({
                     {isTrash && (
                       <GlobalDelete
                         onConfirm={() => handleDelete(item._id)}
-                        validator={item.title}
+                        validator={"video"}
                         loading={isDeleting}
                       />
                     )}
