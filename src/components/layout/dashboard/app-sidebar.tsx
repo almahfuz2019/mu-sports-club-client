@@ -118,6 +118,24 @@ const data = {
       ],
     },
     {
+      title: "Committee",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Committee",
+          url: "/dashboard/add-committee",
+          icon: Building2,
+        },
+        {
+          title: "Manage Committee",
+          url: "/dashboard/manage-committee",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Contact",
       url: "#",
       icon: Building,
