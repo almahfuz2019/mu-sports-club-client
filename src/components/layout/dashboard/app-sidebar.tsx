@@ -136,6 +136,24 @@ const data = {
       ],
     },
     {
+      title: "All Committee",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add All Committee",
+          url: "/dashboard/add-all-committee",
+          icon: Building2,
+        },
+        {
+          title: "Manage All Committee",
+          url: "/dashboard/manage-all-committee",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Contact",
       url: "#",
       icon: Building,

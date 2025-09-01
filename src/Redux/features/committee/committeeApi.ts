@@ -5,7 +5,7 @@ const CommitteeApi = Api.injectEndpoints({
     // ➕ Create new media
     handleCreateCommittee: builder.mutation<any, any>({
       query: (payload) => ({
-        url: "/Committee/create",
+        url: "/committee/create",
         method: "POST",
         body: payload,
       }),
@@ -22,7 +22,7 @@ const CommitteeApi = Api.injectEndpoints({
         isTrash,
         type,
       }) => ({
-        url: "/Committee/find",
+        url: "/committee/find",
         method: "GET",
         params: { page, limit, name: search, status, isTrash, type },
       }),
@@ -41,7 +41,7 @@ const CommitteeApi = Api.injectEndpoints({
     // 🔍 Find single media by slug
     handleFindSingleCommittee: builder.query<any, any>({
       query: (slug) => ({
-        url: `/Committee/find-single/${slug}`,
+        url: `/committee/find-single/${slug}`,
         method: "GET",
       }),
       providesTags: (result, error, slug) => [{ type: "Committee", id: slug }],
@@ -50,7 +50,7 @@ const CommitteeApi = Api.injectEndpoints({
     // ✏️ Update media
     handleUpdateCommittee: builder.mutation<any, any>({
       query: ({ id, payload }) => ({
-        url: `/Committee/update/${id}`,
+        url: `/committee/update/${id}`,
         method: "PUT",
         body: payload,
       }),
@@ -63,7 +63,7 @@ const CommitteeApi = Api.injectEndpoints({
     // 🔄 Update media type
     handleUpdateCommitteeType: builder.mutation<any, any>({
       query: (data) => ({
-        url: `/Committee/type/${data?.id}`,
+        url: `/committee/type/${data?.id}`,
         method: "PUT",
         body: { type: data?.type },
       }),
@@ -76,7 +76,7 @@ const CommitteeApi = Api.injectEndpoints({
     // 🔄 Update media status
     handleUpdateCommitteeStatus: builder.mutation<any, any>({
       query: (data) => ({
-        url: `/Committee/update-status/${data?.id}`,
+        url: `/committee/update-status/${data?.id}`,
         method: "PUT",
         body: { status: data?.status },
       }),
@@ -89,7 +89,7 @@ const CommitteeApi = Api.injectEndpoints({
     // 🗑️ Move media to trash (soft delete)
     handleUpdateCommitteeTrash: builder.mutation<any, any>({
       query: ({ id, isTrash }) => ({
-        url: `/Committee/trash/${id}`,
+        url: `/committee/trash/${id}`,
         method: "PUT",
         body: { isTrash },
       }),
@@ -102,7 +102,7 @@ const CommitteeApi = Api.injectEndpoints({
     // ❌ Permanently delete media
     handleDeleteCommittee: builder.mutation<any, string>({
       query: (id) => ({
-        url: `/Committee/delete/${id}`,
+        url: `/committee/delete/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error, id) => [

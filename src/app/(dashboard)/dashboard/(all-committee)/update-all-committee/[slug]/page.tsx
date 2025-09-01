@@ -12,22 +12,13 @@ import { Form, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { ParamsSlug } from "@/Type/IFields";
 import { IFormInput } from "../../type";
 import { fieldConfig } from "../../fieldConfig";
-import {
-  useHandleFindSingleCommitteeQuery,
-  useHandleUpdateCommitteeMutation,
-} from "@/Redux/features/committee/committeeApi";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // must import the CSS
+import {
+  useHandleFindSingleAllCommitteeQuery,
+  useHandleUpdateAllCommitteeMutation,
+} from "@/Redux/features/allCommittee/allCommittee";
 const getInitialMetaData = () => {
   return fieldConfig.reduce((acc, field) => {
     if (field.formType === "array") {
@@ -58,7 +49,7 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
     getInitialMetaDataHistory
   );
   const [handleUpdate, { isLoading, error }] =
-    useHandleUpdateCommitteeMutation();
+    useHandleUpdateAllCommitteeMutation();
   const router = useRouter();
 
   console.log({ error });
@@ -68,7 +59,7 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
     field: any;
   }>({ open: false, field: null });
 
-  const { data } = useHandleFindSingleCommitteeQuery(slug);
+  const { data } = useHandleFindSingleAllCommitteeQuery(slug);
   useEffect(() => {
     const resolveParams = async () => {
       const resolvedParams = await params;
@@ -88,21 +79,21 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const payload = {
-        title: metaData?.title,
-        designation: metaData?.designation,
-        image: metaData?.image[0],
-        startDate: data.startDate,
-        endDate: data.endDate,
-        committeeStatus: data.committeeStatus,
+        year: data?.year,
+        image: metaData?.image,
       };
 
       console.log({ payload });
       await handleUpdate({ id, payload }).unwrap();
       toast.success("Data updated successfully!");
-      router.push("/dashboard/manage-committee");
+      router.push("/dashboard/manage-all-committee");
     } catch (error: any) {
       console.error({ error });
-      toast.error(error?.data?.payload?.message || "An error occurred");
+      toast.error(
+        error?.data?.payload[0]?.message ||
+          error?.data?.message ||
+          "Something went wrong. Please try again."
+      );
     }
   };
 
@@ -112,16 +103,12 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
     if (data?.payload) {
       const payload = data.payload;
       const newData = {
-        title: payload.title || "",
-        designation: payload.designation || "",
+        year: payload.year || "",
         image: Array.isArray(payload.image)
           ? payload.image
           : payload.image
           ? [payload.image]
           : [],
-        startDate: payload.startDate || "",
-        endDate: payload.endDate || "",
-        committeeStatus: payload.committeeStatus || "",
       };
       setMetaData(newData);
       setMetaDataHistory(newData);
@@ -133,14 +120,48 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
   return (
     <div>
       <Heading
-        title="Update Committee"
-        subTitle="Edit the details of an existing committee."
+        title="Update All Committee"
+        subTitle="Edit the details of an existing all committee."
       />
       <Form {...methods}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="pt-5 lg:pt-7 lg:w-[60%] space-y-10"
         >
+          <FormItem className="mb-4">
+            <FormLabel>Year</FormLabel>
+            <Controller
+              name="year"
+              control={methods.control}
+              rules={{ required: "Year is required" }}
+              render={({ field, fieldState }) => {
+                // Parse stored value (string) to Date for DatePicker
+                const selectedYear = field.value
+                  ? new Date(`${field.value}-01-01`)
+                  : null;
+
+                return (
+                  <>
+                    <DatePicker
+                      selected={selectedYear}
+                      onChange={(date) => {
+                        // Store only the year as string in form state
+                        field.onChange(
+                          date ? date.getFullYear().toString() : null
+                        );
+                      }}
+                      showYearPicker
+                      dateFormat="yyyy"
+                      placeholderText="Select a year"
+                      className="w-full border rounded px-3 py-2"
+                    />
+                    <FormMessage>{fieldState.error?.message}</FormMessage>
+                  </>
+                );
+              }}
+            />
+          </FormItem>
+
           <GlobalFieldRenderer
             fieldConfig={fieldConfig}
             metaData={metaData}
@@ -149,100 +170,6 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
             setHistoryModal={setHistoryModal}
             setMetaDataHistory={setMetaDataHistory}
           />
-
-          <FormItem className="mb-4">
-            <FormLabel>Start Date</FormLabel>
-            <Controller
-              name="startDate"
-              control={methods.control}
-              rules={{ required: "Start Date is required" }}
-              render={({ field, fieldState }) => {
-                // field.value is string | null (incorrect)
-                // So parse it to Date or default to null
-                const selectedDate = field.value ? new Date(field.value) : null;
-
-                return (
-                  <>
-                    <DatePicker
-                      selected={selectedDate}
-                      onChange={(date) => {
-                        // onChange expects Date | null
-                        // Store date as ISO string in form state for consistency
-                        field.onChange(
-                          date ? date.toISOString().split("T")[0] : null
-                        );
-                      }}
-                      dateFormat="yyyy-MM-dd"
-                      placeholderText="Select a date"
-                      className="w-full border rounded px-3 py-2"
-                    />
-                    <FormMessage>{fieldState.error?.message}</FormMessage>
-                  </>
-                );
-              }}
-            />
-          </FormItem>
-          <FormItem className="mb-4">
-            <FormLabel>End Date</FormLabel>
-            <Controller
-              name="endDate"
-              control={methods.control}
-              rules={{ required: "End Date is required" }}
-              render={({ field, fieldState }) => {
-                // field.value is string | null (incorrect)
-                // So parse it to Date or default to null
-                const selectedDate = field.value ? new Date(field.value) : null;
-
-                return (
-                  <>
-                    <DatePicker
-                      selected={selectedDate}
-                      onChange={(date) => {
-                        // onChange expects Date | null
-                        // Store date as ISO string in form state for consistency
-                        field.onChange(
-                          date ? date.toISOString().split("T")[0] : null
-                        );
-                      }}
-                      dateFormat="yyyy-MM-dd"
-                      placeholderText="Select a date"
-                      className="w-full border rounded px-3 py-2"
-                    />
-                    <FormMessage>{fieldState.error?.message}</FormMessage>
-                  </>
-                );
-              }}
-            />
-          </FormItem>
-          <FormItem className="mb-4">
-            <FormLabel>Committee Type</FormLabel>
-            <Controller
-              name="committeeStatus"
-              control={methods.control}
-              rules={{ required: "Type is required" }}
-              render={({ field, fieldState }) => (
-                <>
-                  <Select
-                    value={field.value || ""}
-                    onValueChange={(value) =>
-                      field.onChange(value as "student" | "other")
-                    }
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="student">Student</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage>{fieldState.error?.message}</FormMessage>
-                </>
-              )}
-            />
-          </FormItem>
           <Button
             type="submit"
             disabled={isLoading}
@@ -250,7 +177,7 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isLoading ? "Please Wait..." : "Update Committee"}
+            {isLoading ? "Please Wait..." : "Update All Committee"}
           </Button>
 
           <GlobalAICommandInput
