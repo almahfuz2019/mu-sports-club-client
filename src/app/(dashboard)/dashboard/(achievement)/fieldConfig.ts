@@ -18,9 +18,9 @@ export const fieldConfig: IFields[] = [
     required: true,
   },
   {
-    label: "Logo",
-    valueKey: "logo",
-    placeholder: "Upload a logo",
+    label: "Image",
+    valueKey: "image",
+    placeholder: "Upload a image",
     type: "image",
     formType: "file",
     multiple: false,
