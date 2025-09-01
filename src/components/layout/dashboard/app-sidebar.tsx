@@ -172,6 +172,24 @@ const data = {
       ],
     },
     {
+      title: "Stats",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Stats",
+          url: "/dashboard/add-stats",
+          icon: Building2,
+        },
+        {
+          title: "Manage Stats",
+          url: "/dashboard/manage-stats",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Contact",
       url: "#",
       icon: Building,
