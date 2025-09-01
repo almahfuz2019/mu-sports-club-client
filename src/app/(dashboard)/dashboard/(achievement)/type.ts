@@ -19,7 +19,7 @@ export interface IData {
 export interface IFormInput {
   title: string;
   description: string; // rich text
-  year: Date;
+  year: string;
   image: string; // single image URL or file path
   metaSeoTags?: string[];
   metaSeoDescription?: string;
