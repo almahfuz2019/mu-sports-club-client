@@ -190,6 +190,24 @@ const data = {
       ],
     },
     {
+      title: "Gallery",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Gallery",
+          url: "/dashboard/add-gallery",
+          icon: Building2,
+        },
+        {
+          title: "Manage Gallery",
+          url: "/dashboard/manage-gallery",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Stats",
       url: "#",
       icon: Building,

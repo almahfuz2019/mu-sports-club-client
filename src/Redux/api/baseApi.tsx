@@ -56,6 +56,7 @@ const Api = createApi({
     "Performer",
     "Stats",
     "Achievement",
+    "Gallery",
     "Contact",
   ], // ✅ MUST BE PRESENT
   endpoints: () => ({}),
