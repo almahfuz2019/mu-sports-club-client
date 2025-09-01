@@ -172,6 +172,24 @@ const data = {
       ],
     },
     {
+      title: "Achievement",
+      url: "#",
+      icon: Building,
+      isActive: false,
+      items: [
+        {
+          title: "Add Achievement",
+          url: "/dashboard/add-achievement",
+          icon: Building2,
+        },
+        {
+          title: "Manage Achievement",
+          url: "/dashboard/manage-achievement",
+          icon: Building2Icon,
+        },
+      ],
+    },
+    {
       title: "Stats",
       url: "#",
       icon: Building,

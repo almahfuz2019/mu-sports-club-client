@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import Heading from "@/components/layout/dashboard/shared/heading";
 import { Button } from "@/components/ui/button";
 import GlobalHistoryModal from "@/components/layout/dashboard/shared/GlobalHistoryModal/GlobalHistoryModal";
@@ -9,10 +9,13 @@ import GlobalFieldRenderer from "@/components/layout/dashboard/shared/GlobalFiel
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { GlobalAICommandInput } from "@/components/layout/dashboard/shared/inputs/GlobalAICommandInput/GlobalAICommandInput";
-import { Form } from "@/components/ui/form";
+import { Form, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { IFormInput } from "../type";
 import { fieldConfig } from "../fieldConfig";
-import { useHandleCreateSponsorMutation } from "@/Redux/features/sponsor/sponsorApi";
+import { useHandleCreateAchievementMutation } from "@/Redux/features/achievement/achievementApi";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"; // must import the CSS
 
 const getInitialMetaData = () => {
   return fieldConfig.reduce((acc, field) => {
@@ -43,7 +46,7 @@ const AddPage = () => {
   );
 
   const [handleCreate, { isLoading, error }] =
-    useHandleCreateSponsorMutation();
+    useHandleCreateAchievementMutation();
   const router = useRouter();
 
   const [historyModal, setHistoryModal] = useState<{
@@ -58,12 +61,15 @@ const AddPage = () => {
 
   const methods = useForm<IFormInput>({ defaultValues });
 
-  const onSubmit: SubmitHandler<IFormInput> = async () => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const payload = {
         title: metaData?.title,
-        link: metaData?.link,
-        logo: metaData?.logo[0],
+        description: metaData?.description,
+        year: data.year,
+        image: metaData?.image[0],
+        metaSeoTags: metaData?.metaSeoTags,
+        metaSeoDescription: metaData?.metaSeoDescription,
       };
 
       console.log({ payload });
@@ -71,7 +77,7 @@ const AddPage = () => {
       await handleCreate(payload).unwrap();
 
       toast.success("Data added successfully!");
-      router.push("/dashboard/manage-sponsor");
+      router.push("/dashboard/manage-achievement");
     } catch (error: any) {
       console.error("Error adding:", error);
 
@@ -88,8 +94,8 @@ const AddPage = () => {
   return (
     <div>
       <Heading
-        title="Add Sponsor"
-        subTitle="Enter information to add a new Sponsor to the list."
+        title="Add Achievement"
+        subTitle="Enter information to add a new Achievement to the list."
       />
       <Form {...methods}>
         <form
@@ -104,7 +110,39 @@ const AddPage = () => {
             setHistoryModal={setHistoryModal}
             setMetaDataHistory={setMetaDataHistory}
           />
+          <FormItem className="mb-4">
+            <FormLabel>Year</FormLabel>
+            <Controller
+              name="year"
+              control={methods.control}
+              rules={{ required: "Year is required" }}
+              render={({ field, fieldState }) => {
+                // Parse stored value (string) to Date for DatePicker
+                const selectedYear = field.value
+                  ? new Date(`${field.value}-01-01`)
+                  : null;
 
+                return (
+                  <>
+                    <DatePicker
+                      selected={selectedYear}
+                      onChange={(date) => {
+                        // Store only the year as string in form state
+                        field.onChange(
+                          date ? date.getFullYear().toString() : null
+                        );
+                      }}
+                      showYearPicker
+                      dateFormat="yyyy"
+                      placeholderText="Select a year"
+                      className="w-full border rounded px-3 py-2"
+                    />
+                    <FormMessage>{fieldState.error?.message}</FormMessage>
+                  </>
+                );
+              }}
+            />
+          </FormItem>
           <Button
             type="submit"
             disabled={isLoading}
@@ -112,7 +150,7 @@ const AddPage = () => {
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isLoading ? "Please Wait..." : "Add Sponsor"}
+            {isLoading ? "Please Wait..." : "Add Achievement"}
           </Button>
 
           <GlobalAICommandInput
