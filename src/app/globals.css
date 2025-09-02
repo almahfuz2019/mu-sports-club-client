@@ -19,6 +19,9 @@
   --color-ink-black: #111111;     /* Softer black */
   --color-ocean-blue: #0665bc;    /* Bright oceanic blue */
 
+  --font-montserrat: var(--font-montserrat);
+
+
   /* Gradient (fix: use --gradient- instead of --color-) */
   --gradient-navy-crimson: linear-gradient(
     90deg,
