@@ -1,6 +1,6 @@
 export default function OurVisionAndMission() {
   return (
-    <div className="relative my-10">
+    <div className="relative mt-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 absolute top-0 -z-10 w-full h-full">
         <div className="bg-midnight-navy w-full h-full"></div>
         <div className="bg-crimson-red w-full h-full"></div>

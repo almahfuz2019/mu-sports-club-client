@@ -1,0 +1,30 @@
+import { CalendarDays } from "lucide-react";
+import Image from "next/image";
+import React from "react";
+
+export default function EventCard({ item }: any) {
+  return (
+    <div className="border border-[#C4C4C4]">
+      <Image
+        width={300}
+        height={300}
+        src={item?.cover}
+        alt={item?.title}
+        className="w-full h-full object-cover"
+      />
+      <div className="p-5">
+        <h1 className="flex items-center gap-2 text-sm text-slate-gray font-normal">
+          <CalendarDays size={18} />
+          {new Date(item.eventStartDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </h1>
+        <h3 className="text-xl font-semibold my-2 ">{item.title}</h3>
+      </div>
+      <hr />
+      <button className="text-center text-[2D2D2D] mx-auto my-5 w-full">Read More</button>
+    </div>
+  );
+}
