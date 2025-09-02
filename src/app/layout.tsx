@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Open_Sans, Yanone_Kaffeesatz } from "next/font/google";
+import { Open_Sans, Montserrat } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import ReduxWrapper from "@/Redux/ReduxWrapper";
@@ -9,8 +9,8 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
-const yanoneKaffeesatz = Yanone_Kaffeesatz({
-  variable: "--font-yanone-kaffeesatz",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -29,7 +29,11 @@ export default function RootLayout({
     <ReduxWrapper>
       <html lang="en">
         <body
-          className={`${openSans.className} ${yanoneKaffeesatz.variable} antialiased`}
+          className={`
+            ${openSans.className} 
+            ${montserrat.variable} 
+            antialiased
+          `}
         >
           <div>{children}</div>
           <Toaster reverseOrder={false} />

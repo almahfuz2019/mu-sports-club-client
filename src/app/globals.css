@@ -4,19 +4,27 @@
 
 @custom-variant dark (&:is(.dark *));
 
-.kaffeesatz-font {
-  font-family: var(--font-yanone-kaffeesatz);
+.montserrat-font {
+  font-family: var(--font-montserrat);
 }
 
 @theme {
-  --color-turquoise: #2ad2c3;
-  --color-deep-blue: #006299;
-  --color-light-blue: #eef6fa;
-  --color-dark-navy: #101828;
-  --color-neutral-gray: #646464;
-  --color-sky-blue: #29b0e2;
-  --color-sun-yellow: #f7bb07;
-  --color-background-light: #eef6fa;
+  /* Solid Colors */
+  --color-midnight-navy: #001158; /* Deep navy */
+  --color-crimson-red: #c21f22;   /* Bold accent red */
+  --color-charcoal-gray: #1f1e1e; /* Almost black */
+  --color-onyx-black: #0d0d0d;    /* Rich black */
+  --color-ghost-white: #f6f6f6;   /* Very light neutral */
+  --color-slate-gray: #666666;    /* Medium gray */
+  --color-ink-black: #111111;     /* Softer black */
+  --color-ocean-blue: #0665bc;    /* Bright oceanic blue */
+
+  /* Gradient (fix: use --gradient- instead of --color-) */
+  --gradient-navy-crimson: linear-gradient(
+    90deg,
+    #001158 24.04%,
+    #c21f22 100%
+  );
 }
 
 @theme inline {
