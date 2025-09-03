@@ -63,7 +63,7 @@ export default function Navbar() {
 
             {/* Be Sponsor button */}
             <Link
-              href="/be-sponsor"
+              href="/#be-sponsors"
               className="bg-midnight-navy text-white font-semibold px-4 py-2 hover:bg-blue-950 transition"
             >
               Be Sponsor
@@ -111,7 +111,7 @@ export default function Navbar() {
         })}
 
         <Link
-          href="/be-sponsor"
+          href="/#be-sponsors"
           onClick={() => setIsOpen(false)}
           className="bg-midnight-navy text-white font-semibold px-6 py-3 text-lg hover:bg-blue-950 transition"
         >

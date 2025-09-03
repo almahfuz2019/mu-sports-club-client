@@ -47,6 +47,14 @@ const EventApi = Api.injectEndpoints({
       providesTags: (result, error, slug) => [{ type: "Event", id: slug }],
     }),
 
+    handleFindSingleEventWithPopulate: builder.query<any, any>({
+      query: (slug) => ({
+        url: `/event/find-single-populate/${slug}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, slug) => [{ type: "Event", id: slug }],
+    }),
+
     // ✏️ Update media
     handleUpdateEvent: builder.mutation<any, any>({
       query: ({ id, payload }) => ({
@@ -118,6 +126,7 @@ export const {
   useHandleCreateEventMutation,
   useHandleFindEventQuery,
   useHandleFindSingleEventQuery,
+  useHandleFindSingleEventWithPopulateQuery,
   useHandleUpdateEventMutation,
   useHandleUpdateEventStatusMutation,
   useHandleUpdateEventTrashMutation,

@@ -1,5 +1,6 @@
 import { CalendarDays } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function EventCard({ item }: any) {
@@ -27,7 +28,7 @@ export default function EventCard({ item }: any) {
       </div>
       <hr />
       <button className="text-center text-[#2D2D2D] mx-auto my-3 w-full">
-        Read More
+        <Link href={`/events/${item?.slug}`}>Read More</Link>
       </button>
     </div>
   );

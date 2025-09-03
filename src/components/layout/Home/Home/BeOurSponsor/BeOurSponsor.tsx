@@ -4,7 +4,7 @@ import { RiTwitterLine } from "react-icons/ri";
 
 export default function BeOurSponsor() {
   return (
-    <div className="px-[5%] py-16">
+    <div className="px-[5%] py-16" id="be-sponsors">
       <div className="max-w-screen-xl mx-auto">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-montserrat text-ink-black text-center mb-10">
           Want to be our sponsor ? <br /> just call us

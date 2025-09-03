@@ -3,6 +3,7 @@
 import { useHandleFindEventQuery } from "@/Redux/features/event/eventApi";
 import { MoveLeftIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Banner() {
@@ -69,9 +70,12 @@ export default function Banner() {
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white my-3 montserrat-font">
               {event?.title}
             </h1>
-            <button className="bg-crimson-red text-sm text-white px-4 py-2 hover:bg-red-600 transition flex gap-2 w-fit cursor-pointer">
+            <Link
+              href={`/events/${event?.slug}`}
+              className="bg-crimson-red text-sm text-white px-4 py-2 hover:bg-red-600 transition flex gap-2 w-fit cursor-pointer"
+            >
               Details <MoveLeftIcon className="rotate-180 mt-[2px]" size={16} />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
