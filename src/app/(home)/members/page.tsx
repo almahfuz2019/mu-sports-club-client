@@ -90,7 +90,7 @@ export default function Member() {
                     </h1>
                     <Link
                       href={`/members/${item?.slug}`}
-                      className="border bg-midnight-navy text-white border-midnight-navy font-semibold px-3 sm:px-10 py-1 sm:py-3 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer w-fit"
+                      className="border bg-midnight-navy text-white border-midnight-navy px-3 sm:px-10 py-1 sm:py-3 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer w-fit"
                     >
                       Explore All
                     </Link>

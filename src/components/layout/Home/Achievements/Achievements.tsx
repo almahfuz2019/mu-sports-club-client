@@ -116,7 +116,7 @@ export default function Achievements() {
                   </div>
                   <h3 className="text-xl font-semibold my-2 ">{item.title}</h3>
                   <h3
-                    className="text-sm font-normal"
+                    className="text-sm font-normal  text-slate-gray"
                     dangerouslySetInnerHTML={{
                       __html: item.description?.slice(0, 200) + "...",
                     }}
@@ -128,7 +128,7 @@ export default function Achievements() {
                           Read More
                         </button>
                       </DialogTrigger>
-                      <DialogContent2 className="sm:max-w-[600px] p-0 border-0 h-[90vh] overflow-y-scroll">
+                      <DialogContent2 className="sm:max-w-[600px] p-0 border-0 max-h-[90vh] overflow-y-scroll">
                         <DialogHeader>
                           <DialogTitle className="bg-midnight-navy text-start text-white p-5">
                             Achievement {item?.year}

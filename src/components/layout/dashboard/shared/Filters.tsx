@@ -32,7 +32,7 @@ export default function Filters({
         {/* Filters Section */}
         <div className="flex flex-row flex-wrap items-start sm:items-center gap-4">
           <div className="flex gap-2 w-[350px] sm:flex-1 ">
-            <Input ref={searchRef} placeholder="Enter query" />
+            <Input ref={searchRef} placeholder="Search here..." />
             <Button onClick={handleSearch}>Search</Button>
           </div>
           <Button variant="outline">
