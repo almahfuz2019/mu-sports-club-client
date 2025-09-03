@@ -21,10 +21,11 @@ const AchievementApi = Api.injectEndpoints({
         status,
         isTrash,
         type,
+        year,
       }) => ({
         url: "/achievement/find",
         method: "GET",
-        params: { page, limit, name: search, status, isTrash, type },
+        params: { page, limit, name: search, status, isTrash, type, year },
       }),
       providesTags: (result) =>
         result?.data
@@ -44,7 +45,9 @@ const AchievementApi = Api.injectEndpoints({
         url: `/achievement/find-single/${slug}`,
         method: "GET",
       }),
-      providesTags: (result, error, slug) => [{ type: "Achievement", id: slug }],
+      providesTags: (result, error, slug) => [
+        { type: "Achievement", id: slug },
+      ],
     }),
 
     // ✏️ Update media

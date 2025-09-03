@@ -24,7 +24,7 @@ export default function EventCard({ item }: any) {
         <h3 className="text-xl font-semibold my-2 ">{item.title}</h3>
       </div>
       <hr />
-      <button className="text-center text-[2D2D2D] mx-auto my-5 w-full">Read More</button>
+      <button className="text-center text-[#2D2D2D] mx-auto my-5 w-full">Read More</button>
     </div>
   );
 }
