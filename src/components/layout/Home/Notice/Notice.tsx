@@ -13,7 +13,6 @@ import {
 import { useHandleFindNoticeQuery } from "@/Redux/features/notice/noticeApi";
 import { ArrowRight, CalendarDays, Megaphone } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 
 export default function Notice() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -154,13 +153,6 @@ export default function Notice() {
                                 __html: item.description,
                               }}
                             />
-                            <Link
-                              href={item?.link}
-                              target="_blank"
-                              className="text-blue-600 text-lg hover:underline"
-                            >
-                              View
-                            </Link>
                           </DialogDescription>
                         </DialogHeader>
                       </DialogContent2>
