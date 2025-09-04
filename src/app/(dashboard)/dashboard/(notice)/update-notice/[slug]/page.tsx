@@ -77,7 +77,6 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
     try {
       const payload = {
         title: metaData?.title,
-        link: metaData?.link,
         description: metaData?.description,
         metaSeoTags: metaData?.metaSeoTags,
         metaSeoDescription: metaData?.metaSeoDescription,
@@ -101,7 +100,6 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
       const newData = {
         title: payload.title || "",
         description: payload.description || "",
-        link: payload.link || "",
         metaSeoTags: payload.metaSeoTags || [],
         metaSeoDescription: payload.metaSeoDescription || "",
       };

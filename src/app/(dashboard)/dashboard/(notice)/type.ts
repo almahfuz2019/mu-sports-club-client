@@ -4,7 +4,6 @@ export interface IData {
   title: string;
   slug: string;
   description: string;
-  link: string; // URL for the notice
   status: "pending" | "published";
   isPaid: boolean;
   isTrash: boolean;
@@ -18,7 +17,6 @@ export interface IData {
 export interface IFormInput {
   title: string;
   description: string;
-  link: string; // URL for the notice
   metaSeoTags?: string[];
   metaSeoDescription?: string;
 }

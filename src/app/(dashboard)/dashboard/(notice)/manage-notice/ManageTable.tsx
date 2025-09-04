@@ -69,7 +69,6 @@ export default function ManageTable({
           </TableHead>
           <TableHead>Title</TableHead>
           <TableHead>Description</TableHead>
-          <TableHead>Link</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Create Date</TableHead>
           <TableHead className="text-right">Action</TableHead>
@@ -147,21 +146,6 @@ export default function ManageTable({
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
-              </TableCell>
-              <TableCell>
-                <Link
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    variant="ghost"
-                    className="text-blue-600 hover:text-blue-800 mt-1 hover:bg-transparent"
-                  >
-                    <Eye />
-                    View
-                  </Button>
-                </Link>
               </TableCell>
               <TableCell className="capitalize">
                 <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />

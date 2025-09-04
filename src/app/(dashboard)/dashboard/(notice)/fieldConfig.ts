@@ -18,14 +18,6 @@ export const fieldConfig: IFields[] = [
     required: true,
   },
   {
-    label: "Link",
-    valueKey: "link",
-    placeholder: "Enter the link",
-    type: "text",
-    formType: "string",
-    required: true,
-  },
-  {
     label: "Meta SEO Tag",
     valueKey: "metaSeoTags",
     placeholder: "Enter the Meta SEO Tag",

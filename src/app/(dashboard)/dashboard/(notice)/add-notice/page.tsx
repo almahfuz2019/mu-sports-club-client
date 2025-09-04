@@ -61,7 +61,6 @@ const AddPage = () => {
     try {
       const payload = {
         title: metaData?.title,
-        link: metaData?.link,
         description: metaData?.description,
         metaSeoTags: metaData?.metaSeoTags,
         metaSeoDescription: metaData?.metaSeoDescription,
