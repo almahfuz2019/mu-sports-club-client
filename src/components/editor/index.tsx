@@ -3,13 +3,14 @@
 
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import MenuBar from "./menu-bar";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
+import Link from "@tiptap/extension-link";
 
 interface RichTextEditorProps {
-  content: string | string[];
+  content: string;
   onChange: (content: string) => void;
 }
 
@@ -17,26 +18,27 @@ export default function RichTextEditor({
   content,
   onChange,
 }: RichTextEditorProps) {
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        bulletList: {
-          HTMLAttributes: {
-            class: "list-disc ml-3",
-          },
-        },
-        orderedList: {
-          HTMLAttributes: {
-            class: "list-decimal ml-3",
-          },
-        },
-      }),
+  // ✅ Memoize extensions
+  const extensions = useMemo(
+    () => [
+      StarterKit,
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
       Highlight,
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: "text-blue-600 underline",
+        },
+      }),
     ],
-    content: "", // Set initially empty
+    []
+  );
+
+  const editor = useEditor({
+    extensions,
+    content, // ✅ use initial content directly
     editorProps: {
       attributes: {
         class: "min-h-[156px] border rounded-b-xs py-3 px-3 outline-none",
@@ -47,11 +49,14 @@ export default function RichTextEditor({
     },
   });
 
+  // ✅ Update editor if content changes externally
   useEffect(() => {
-    if (editor && content && editor.getHTML() !== content) {
-      editor.commands.setContent(content);
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content, false); // false = don’t emit onUpdate again
     }
   }, [editor, content]);
+
+  if (!editor) return null; // ✅ avoid rendering until editor is ready
 
   return (
     <div className="mt-1">
