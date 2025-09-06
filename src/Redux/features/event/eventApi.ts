@@ -20,11 +20,11 @@ const EventApi = Api.injectEndpoints({
         search = "",
         status,
         isTrash,
-        type,
+        year,
       }) => ({
         url: "/event/find",
         method: "GET",
-        params: { page, limit, name: search, status, isTrash, type },
+        params: { page, limit, name: search, status, isTrash, year },
       }),
       providesTags: (result) =>
         result?.data

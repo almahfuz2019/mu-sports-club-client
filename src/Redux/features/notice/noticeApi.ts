@@ -20,11 +20,11 @@ const NoticeApi = Api.injectEndpoints({
         search = "",
         status,
         isTrash,
-        type,
+        year,
       }) => ({
         url: "/notice/find",
         method: "GET",
-        params: { page, limit, name: search, status, isTrash, type },
+        params: { page, limit, name: search, status, isTrash, year },
       }),
       providesTags: (result) =>
         result?.data

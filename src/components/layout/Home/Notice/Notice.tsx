@@ -13,8 +13,24 @@ import {
 import { useHandleFindNoticeQuery } from "@/Redux/features/notice/noticeApi";
 import { ArrowRight, CalendarDays, Megaphone } from "lucide-react";
 import { Input } from "@/components/ui/input";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 export default function Notice() {
+  const currentYear = new Date().getFullYear();
+  // "Recent" replaces current year → we only keep numbers in the list
+  const years = [
+    currentYear,
+    ...Array.from({ length: 8 }, (_, i) => currentYear - 1 - i),
+  ];
+
+  // Default state is currentYear (which is shown as "Recent" in UI)
+  const [year, setYear] = useState<number>(currentYear);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
@@ -25,6 +41,7 @@ export default function Notice() {
     search: searchText,
     status: "published",
     isTrash: false,
+    year,
   });
 
   const allData = data?.payload?.data || [];
@@ -58,21 +75,39 @@ export default function Notice() {
         <div className="max-w-screen-xl mx-auto">
           {/* Year Buttons */}
           <div className="flex flex-wrap justify-center items-center gap-5">
-            <div className="flex items-center justify-center">
-              <Input
-                ref={searchRef}
-                placeholder="Search here..."
-                className="bg-white"
-              />
-              <button
-                className="border text-base bg-midnight-navy text-white border-midnight-navy px-5 py-1 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer"
-                onClick={handleSearch}
+            <div className="flex items-center justify-center flex-wrap gap-5">
+              <div className="flex items-center justify-center">
+                <Input
+                  ref={searchRef}
+                  placeholder="Search here..."
+                  className="bg-white"
+                />
+                <button
+                  className="border text-base bg-midnight-navy text-white border-midnight-navy px-5 py-1 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer"
+                  onClick={handleSearch}
+                >
+                  Search
+                </button>
+              </div>
+              <Select
+                onValueChange={(value) => setYear(Number(value))}
+                defaultValue={String(year)}
               >
-                Search
-              </button>
+                <SelectTrigger className="w-[250px] rounded-none">
+                  <SelectValue placeholder="Select a year" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {years.map((y, idx) => (
+                      <SelectItem key={y} value={String(y)}>
+                        {idx === 0 ? "This year" : y}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
-
           {/* Content */}
           {isLoading ? (
             <div className="pt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

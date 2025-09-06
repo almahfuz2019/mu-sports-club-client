@@ -4,8 +4,25 @@ import { Input } from "@/components/ui/input";
 import { PaginationGlobal } from "../../Shared/PaginationGlobal/PaginationGlobal";
 import EventCard from "../../Shared/Card/EventCard/EventCard";
 import { useHandleFindEventQuery } from "@/Redux/features/event/eventApi";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function EventsCards() {
+  const currentYear = new Date().getFullYear();
+  // "Recent" replaces current year → we only keep numbers in the list
+  const years = [
+    currentYear,
+    ...Array.from({ length: 8 }, (_, i) => currentYear - 1 - i),
+  ];
+
+  // Default state is currentYear (which is shown as "Recent" in UI)
+  const [year, setYear] = useState<number>(currentYear);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
@@ -16,6 +33,7 @@ export default function EventsCards() {
     search: searchText,
     status: "published",
     isTrash: false,
+    year,
   });
 
   const allData = data?.payload?.data || [];
@@ -49,18 +67,37 @@ export default function EventsCards() {
         <div className="max-w-screen-xl mx-auto">
           {/* Year Buttons */}
           <div className="flex flex-wrap justify-center items-center gap-5">
-            <div className="flex items-center justify-center">
-              <Input
-                ref={searchRef}
-                placeholder="Search here..."
-                className="bg-white"
-              />
-              <button
-                className="border text-base bg-midnight-navy text-white border-midnight-navy px-5 py-1 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer"
-                onClick={handleSearch}
+            <div className="flex items-center justify-center flex-wrap gap-5">
+              <div className="flex items-center justify-center">
+                <Input
+                  ref={searchRef}
+                  placeholder="Search here..."
+                  className="bg-white"
+                />
+                <button
+                  className="border text-base bg-midnight-navy text-white border-midnight-navy px-5 py-1 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer"
+                  onClick={handleSearch}
+                >
+                  Search
+                </button>
+              </div>
+              <Select
+                onValueChange={(value) => setYear(Number(value))}
+                defaultValue={String(year)}
               >
-                Search
-              </button>
+                <SelectTrigger className="w-[250px] rounded-none">
+                  <SelectValue placeholder="Select a year" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {years.map((y, idx) => (
+                      <SelectItem key={idx} value={String(y)}>
+                        {idx === 0 ? "This year" : y}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -77,8 +114,8 @@ export default function EventsCards() {
                 No Events Found
               </h2>
               <p className="text-gray-500 max-w-md">
-                We couldn’t find any Events for . Please try selecting
-                another year.
+                We couldn’t find any Events for . Please try selecting another
+                year.
               </p>
             </div>
           ) : (
