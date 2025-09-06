@@ -114,7 +114,7 @@ export default function Member() {
                             alt={item?.title}
                             width={500}
                             height={300}
-                            className="object-cover w-full h-fit"
+                            className="object-cover w-full h-72"
                           />
                         </CarouselItem>
                       ))}

@@ -68,7 +68,7 @@ export default function Achievements() {
                   setCurrentPage(1); // reset page when year changes
                 }}
                 className={`${
-                  year === y
+                  year !== y
                     ? "bg-transparent text-midnight-navy"
                     : "bg-midnight-navy text-white"
                 } border border-midnight-navy font-semibold px-3 sm:px-10 py-1 sm:py-3 hover:bg-transparent hover:text-midnight-navy transition cursor-pointer`}
@@ -124,7 +124,7 @@ export default function Achievements() {
                   <Dialog>
                     <form>
                       <DialogTrigger asChild>
-                        <button className="text-ocean-blue text-start mx-auto my-5 w-full cursor-pointer">
+                        <button className="text-ocean-blue text-start mx-auto my-5 w-full cursor-pointer hover:underline">
                           Read More
                         </button>
                       </DialogTrigger>

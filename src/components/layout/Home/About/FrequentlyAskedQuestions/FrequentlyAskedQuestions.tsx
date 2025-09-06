@@ -18,7 +18,7 @@ export default function FrequentlyAskedQuestions() {
         defaultValue="item-1"
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger className="font-semibold cursor-pointer">Product Information</AccordionTrigger>
+          <AccordionTrigger className="font-semibold cursor-pointer text-lg">Product Information</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-4 text-balance">
             <p>
               Our flagship product combines cutting-edge technology with sleek
@@ -32,7 +32,7 @@ export default function FrequentlyAskedQuestions() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger className="font-semibold cursor-pointer">Shipping Details</AccordionTrigger>
+          <AccordionTrigger className="font-semibold cursor-pointer text-lg">Shipping Details</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-4 text-balance">
             <p>
               We offer worldwide shipping through trusted courier partners.
@@ -46,7 +46,7 @@ export default function FrequentlyAskedQuestions() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger className="font-semibold cursor-pointer">Return Policy</AccordionTrigger>
+          <AccordionTrigger className="font-semibold cursor-pointer text-lg">Return Policy</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-4 text-balance">
             <p>
               We stand behind our products with a comprehensive 30-day return

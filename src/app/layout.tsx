@@ -15,9 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Ca Immigration",
-  description:
-    "Ca Immigration is a platform that helps you to immigrate to Canada",
+  title: "MU Sports Club",
+  description: "MU Sports Club || Born to rule over the game || Est, 2006 ",
 };
 
 export default function RootLayout({

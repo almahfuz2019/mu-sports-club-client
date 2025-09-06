@@ -12,7 +12,7 @@ export default function EventCard({ item }: any) {
           height={300}
           src={item?.cover}
           alt={item?.title}
-          className="w-full h-full object-cover"
+          className="w-full h-60 object-cover"
         />
       </div>
       <div className="p-5">
@@ -27,7 +27,7 @@ export default function EventCard({ item }: any) {
         <h3 className="text-xl font-semibold my-2 ">{item.title}</h3>
       </div>
       <hr />
-      <button className="text-center text-[#2D2D2D] mx-auto my-3 w-full">
+      <button className="text-center text-[#2D2D2D] mx-auto my-3 w-full hover:underline">
         <Link href={`/events/${item?.slug}`}>Read More</Link>
       </button>
     </div>

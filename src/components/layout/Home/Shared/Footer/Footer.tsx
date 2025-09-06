@@ -89,13 +89,13 @@ export default function Footer() {
       {/* Bottom Line */}
       <div className="border-t border-gray-700 mt-10 pt-4 text-sm text-gray-400 flex flex-col sm:flex-row justify-between items-center max-w-screen-xl mx-auto gap-5">
         <p>
-          Copyright@
+          Copyright
           <Link
             href={"https://metrouni.edu.bd/"}
             target="_blank"
             className="text-white font-semibold"
           >
-            Metropolitan University
+            © Metropolitan University {new Date().getFullYear()}
           </Link>
         </p>
         <p>

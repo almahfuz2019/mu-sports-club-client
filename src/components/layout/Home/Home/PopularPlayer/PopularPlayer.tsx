@@ -52,7 +52,7 @@ export default function PopularPlayer() {
                   className="pl-1 md:basis-1/2 lg:basis-1/4"
                 >
                   <div className="p-1">
-                    <div className="relative w-full">
+                    <div className="relative w-full overflow-hidden">
                       <Image
                         src={player.image}
                         alt={player.name}
@@ -60,13 +60,13 @@ export default function PopularPlayer() {
                         height={200}
                         className="object-cover w-full"
                       />
-                      <div className="absolute z-20 bottom-5 right-5">
+                      <div className="absolute z-20 -bottom-18 -right-18 bg-black/50 rounded-full h-52 w-52">
                         <Image
                           src={player.logo}
                           alt={player.name}
                           width={50}
                           height={50}
-                          className="object-cover h-16 w-full"
+                          className="object-cover h-20 w-20 mt-10 ml-10"
                         />
                       </div>
                     </div>

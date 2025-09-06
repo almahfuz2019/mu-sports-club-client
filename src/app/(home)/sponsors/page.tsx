@@ -4,6 +4,7 @@ import Breadcrumb from "./Breadcrumb/Breadcrumb";
 import { useHandleFindSponsorQuery } from "@/Redux/features/sponsor/sponsorApi";
 import Image from "next/image";
 import { PaginationGlobal } from "@/components/layout/Home/Shared/PaginationGlobal/PaginationGlobal";
+import Link from "next/link";
 
 export default function Sponsor() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,13 +57,15 @@ export default function Sponsor() {
                 className="bg-white p-5 sm:p-10 flex flex-col justify-center items-center gap-3"
                 key={item._id}
               >
-                <Image
-                  width={300}
-                  height={300}
-                  src={item?.logo}
-                  alt={item?.title}
-                  className="w-1/2 h-fit object-cover"
-                />
+                <Link href={item?.link}>
+                  <Image
+                    width={300}
+                    height={300}
+                    src={item?.logo}
+                    alt={item?.title}
+                    className="w-1/2 h-fit object-cover mx-auto"
+                  />
+                </Link>
                 <h3 className="text-xl font-semibold my-2 text-center">
                   {item.title}
                 </h3>

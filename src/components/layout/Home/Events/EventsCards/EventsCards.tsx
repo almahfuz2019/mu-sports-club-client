@@ -74,10 +74,10 @@ export default function EventsCards() {
           ) : isError || allData.length === 0 ? (
             <div className="py-20 flex flex-col items-center justify-center text-center">
               <h2 className="text-2xl font-semibold text-midnight-navy mb-2">
-                No Achievements Found
+                No Events Found
               </h2>
               <p className="text-gray-500 max-w-md">
-                We couldn’t find any achievements for . Please try selecting
+                We couldn’t find any Events for . Please try selecting
                 another year.
               </p>
             </div>
