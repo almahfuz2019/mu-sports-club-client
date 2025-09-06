@@ -112,7 +112,6 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
     try {
       const payload = {
         title: metaData?.title,
-        ticketPrice: Number(metaData?.ticketPrice),
         description: metaData?.description,
         registrationFormLink: metaData?.registrationFormLink,
         cover: metaData?.cover[0],
@@ -142,7 +141,6 @@ const UpdatePage: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
       const payload = data.payload;
       const newData = {
         title: payload.title || "",
-        ticketPrice: payload.ticketPrice || 0,
         description: payload.description || "",
         registrationFormLink: payload.registrationFormLink || "",
         category: payload.category || "",

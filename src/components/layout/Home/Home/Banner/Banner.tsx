@@ -27,7 +27,7 @@ export default function Banner() {
   if (isLoading) {
     return (
       <div className="max-w-screen-xl mx-auto py-10">
-        <div className="w-full h-96 bg-gray-200 animate-pulse rounded-md relative">
+        <div className="w-full h-72 sm:h-96 lg:h-[500px] bg-gray-200 animate-pulse rounded-md relative">
           <div className="absolute inset-0 bg-gradient-to-t from-gray-400 via-gray-300 to-transparent p-5 flex flex-col justify-end">
             <div className="space-y-3 max-w-xl">
               <div className="flex gap-2">
@@ -49,7 +49,7 @@ export default function Banner() {
         <CarouselContent>
           {allData.map((event: any, index: number) => (
             <CarouselItem key={index}>
-              <div className="relative w-full h-96 border border-white">
+              <div className="relative w-full h-72 sm:h-96 lg:h-[500px] border border-white">
                 {event?.cover && (
                   <Image
                     height={500}

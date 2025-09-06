@@ -16,26 +16,42 @@ export default function AboutUs() {
           About Us
         </h1>
         <p className="sm:text-lg text-slate-gray">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco -laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco -laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco -laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Established in 2006, MU Sports Club is the largest and most active
+          student organization at Metropolitan University. Built on the passion
+          for sports and gaming, the club works to create a culture of energy,
+          excitement, and unity through both indoor and outdoor activities.
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          Over the years, MU Sports Club has grown into the hub of competitive
+          and recreational sports on campus. From major tournaments to casual
+          matches, we provide a platform where talent meets opportunity, and
+          every player gets the chance to shine.
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          Our flagship events include:
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          UPL – University Premier League
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          MPL – Metropolitan Premier League
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          CLC – Cricket League for Colleges
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          League M – League Metropolitan
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">MU Indoor Tournament</p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          MU Futsal & Intra-MUSC Futsal Tournament
+        </p>{" "}
+        <p className="sm:text-lg text-slate-gray">MU Badminton Tournaments</p>{" "}
+        <p className="sm:text-lg text-slate-gray">
+          At MU Sports Club, we believe sports are more than just games—they
+          build character, teamwork, and lifelong memories. With every event we
+          organize, we aim to carry forward the true essence of sportsmanship at
+          Metropolitan University.
         </p>
       </div>
     </div>

@@ -57,7 +57,7 @@ export default function Sponsor() {
                 className="bg-white p-5 sm:p-10 flex flex-col justify-center items-center gap-3"
                 key={item._id}
               >
-                <Link href={item?.link}>
+                <Link href={item?.link} target="_blank">
                   <Image
                     width={300}
                     height={300}

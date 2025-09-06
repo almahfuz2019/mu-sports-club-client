@@ -97,7 +97,6 @@ const AddPage = () => {
     try {
       const payload = {
         title: metaData?.title,
-        ticketPrice: Number(metaData?.ticketPrice),
         description: metaData?.description,
         registrationFormLink: metaData?.registrationFormLink,
         cover: metaData?.cover[0],

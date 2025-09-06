@@ -11,16 +11,13 @@ import { useHandleFindEventQuery } from "@/Redux/features/event/eventApi";
 import Breadcrumb from "./Breadcrumb/Breadcrumb";
 import { useHandleFindSingleEventWithPopulateQuery } from "@/Redux/features/event/eventApi";
 import { ParamsSlug } from "@/Type/IFields";
-import { CalendarDays, Tickets } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-} from "react-icons/fa";
+
 import EventCard from "@/components/layout/Home/Shared/Card/EventCard/EventCard";
+import Link from "next/link";
+import ShareThisEvent from "./ShareThisEvent";
 const Details: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
   const [slug, setSlug] = useState<string>("");
 
@@ -94,10 +91,16 @@ const Details: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
                   }
                 )}
               </h1>
-              <h1 className="flex items-center gap-2 sm:text-lg text-ink-black font-normal border border-[#C4C4C4] p-3">
-                <Tickets size={18} />
-                Ticket Price - {data?.payload?.ticketPrice}
+              <h1 className="flex">
+                <Link
+                  href={data?.payload?.registrationFormLink || "#"}
+                  target="_blank"
+                  className="text-sm sm:text-lg bg-midnight-navy text-white font-semibold px-4 py-2 hover:bg-blue-950 transition w-full flex-1 text-center"
+                >
+                  Registration Form
+                </Link>
               </h1>
+
               <div className="sm:text-lg text-ink-black font-normal border border-[#C4C4C4] p-4 space-y-5">
                 <p>Sponsors</p>
                 {data?.payload?.sponsor?.map((sp: any) => {
@@ -120,25 +123,7 @@ const Details: React.FC<{ params: Promise<ParamsSlug> }> = ({ params }) => {
                   );
                 })}
               </div>
-              <div className="border border-[#C4C4C4] p-4">
-                <h1 className="sm:text-lg text-ink-black font-normal mb-3">
-                  Share This Event
-                </h1>
-                <div className="flex items-center gap-4">
-                  <a href="#" className="bg-[#1877F2] p-3 text-white">
-                    <FaFacebookF size={20} />
-                  </a>
-                  <a href="#" className="bg-[#1DA1F2] p-3 text-white">
-                    <FaTwitter size={20} />
-                  </a>
-                  <a href="#" className="bg-[#0077B5] p-3 text-white">
-                    <FaLinkedinIn size={20} />
-                  </a>
-                  <a href="#" className="bg-[#E4405F] p-3 text-white">
-                    <FaInstagram size={20} />
-                  </a>
-                </div>
-              </div>
+              <ShareThisEvent title={data?.payload?.title} />
             </div>
           </div>
           <hr className="my-10" />

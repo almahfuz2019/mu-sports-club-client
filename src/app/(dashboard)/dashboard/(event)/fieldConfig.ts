@@ -10,14 +10,6 @@ export const fieldConfig: IFields[] = [
     required: true,
   },
   {
-    label: "Ticket Price",
-    valueKey: "ticketPrice",
-    placeholder: "Enter the ticket price",
-    type: "number",
-    formType: "number",
-    required: true,
-  },
-  {
     label: "Description",
     valueKey: "description",
     placeholder: "Enter the description",

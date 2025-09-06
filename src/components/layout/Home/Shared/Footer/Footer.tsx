@@ -23,8 +23,7 @@ export default function Footer() {
             <div className="flex items-start gap-2">
               <MapPin className="w-5 h-5 text-white shrink-0 mt-1" />
               <p className="text-sm leading-relaxed flex-1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                dictum aliquet
+                Metropolitan University, Bateshwar, Sylhet, Bangladesh, 3104
               </p>
             </div>
 
@@ -89,9 +88,8 @@ export default function Footer() {
       {/* Bottom Line */}
       <div className="border-t border-gray-700 mt-10 pt-4 text-sm text-gray-400 flex flex-col sm:flex-row justify-between items-center max-w-screen-xl mx-auto gap-5">
         <p>
-          Copyright
           <Link
-            href={"https://metrouni.edu.bd/"}
+            href="https://metrouni.edu.bd/"
             target="_blank"
             className="text-white font-semibold"
           >
@@ -99,7 +97,7 @@ export default function Footer() {
           </Link>
         </p>
         <p>
-          Design & Develop By{" "}
+          Designed and Developed By{" "}
           <Link
             href={"https://www.qrinux.com/"}
             target="_blank"

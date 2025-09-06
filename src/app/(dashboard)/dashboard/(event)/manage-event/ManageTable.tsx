@@ -76,7 +76,6 @@ export default function ManageTable({
           <TableHead>Category</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Sponsor</TableHead>
-          <TableHead>Ticket Price</TableHead>
           <TableHead>Registration Form Link</TableHead>
           <TableHead>Create Date</TableHead>
           <TableHead className="text-right">Action</TableHead>
@@ -258,10 +257,6 @@ export default function ManageTable({
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
-              </TableCell>
-              <TableCell>
-                <UserRound className="w-4 h-4 text-blue-600 inline mr-1" />
-                {item.ticketPrice}
               </TableCell>
               <TableCell>
                 <Link

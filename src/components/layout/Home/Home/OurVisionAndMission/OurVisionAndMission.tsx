@@ -1,3 +1,5 @@
+import { Dot } from "lucide-react";
+
 export default function OurVisionAndMission() {
   return (
     <div className="relative mt-10">
@@ -12,28 +14,50 @@ export default function OurVisionAndMission() {
               Our Vision
             </h1>
             <p className="text-white ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              To create a thriving community where sports and gaming go beyond
+              competition shaping character, building unity, and inspiring
+              future leaders. We envision MU Sports Club as a platform that
+              empowers every student to embrace teamwork, discipline, and
+              healthy living, while representing Metropolitan University with
+              pride at local, national, and global levels.
             </p>
           </div>
           <div className="py-10 lg:py-20">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-montserrat text-white mb-10">
               Our Mission
             </h1>
-            <p className="text-white ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div className="text-white ">
+              <div className="flex gap-1">
+                <Dot size={25} className="w-10" />
+                <p className="flex-1">
+                  To promote a vibrant sporting culture at Metropolitan
+                  University through diverse indoor and outdoor activities.
+                </p>
+              </div>
+              <div className="flex gap-1">
+                <Dot size={25} className="w-10" />
+                <p className="flex-1">
+                  To organize professional, competitive, and recreational
+                  tournaments that bring together students, athletes, and sports
+                  enthusiasts.
+                </p>
+              </div>
+              <div className="flex gap-1">
+                <Dot size={25} className="w-10" />
+                <p className="flex-1">
+                  To nurture talent, discipline, and teamwork while encouraging
+                  healthy lifestyles and lifelong friendships.
+                </p>
+              </div>
+              <div className="flex gap-1">
+                <Dot size={25} className="w-10" />
+                <p className="flex-1">
+                  To build a strong platform that represents Metropolitan
+                  University with pride in both local and national sporting
+                  arenas.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

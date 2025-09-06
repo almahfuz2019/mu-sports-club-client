@@ -14,7 +14,6 @@ export interface IData {
   _id: string;
   title: string;
   slug: string;
-  ticketPrice: number;
   category: ICategory; // reference to EventCategory
   sponsor?: ISponsor[]; // references to Sponsor
   description: string;
@@ -34,7 +33,6 @@ export interface IData {
 // Types
 export interface IFormInput {
   title: string;
-  ticketPrice: number;
   category: string; // reference to EventCategory
   sponsor?: string[]; // references to Sponsor
   description: string;

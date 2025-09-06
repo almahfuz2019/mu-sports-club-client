@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useHandleFindNoticeQuery } from "@/Redux/features/notice/noticeApi";
-import { ArrowRight, CalendarDays, Megaphone } from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Image from "next/image";
 export default function Notice() {
   const currentYear = new Date().getFullYear();
   // "Recent" replaces current year → we only keep numbers in the list
@@ -130,9 +131,12 @@ export default function Notice() {
               {allData?.map((item: any) => (
                 <div className="bg-white p-5 shadow" key={item?._id}>
                   <div className="flex gap-5">
-                    <Megaphone
-                      size={50}
-                      className="text-white bg-midnight-navy rounded-full p-[10px] inline w-12 h-12 mt-2 -rotate-45"
+                    <Image
+                      height={100}
+                      width={100}
+                      src={"/images/notice.svg"}
+                      alt="Notice icon"
+                      className="text-white bg-midnight-navy rounded-full p-[10px] inline w-12 h-12 mt-2"
                     />
                     <div className="flex-1">
                       <h3 className="text-xl font-semibold my-2">
