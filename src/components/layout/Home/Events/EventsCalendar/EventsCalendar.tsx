@@ -11,8 +11,9 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import Image from "next/image";
 import { CalendarDays } from "lucide-react";
 import Link from "next/link";
-
 import "./calendar-custom.css"; // your overrides
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function EventsCalendar() {
   const { data: upcomingData, isLoading: upcomingLoading } =
@@ -36,7 +37,16 @@ export default function EventsCalendar() {
   const upcomingEvent = upcomingData?.payload || {};
   const findByDateEvent = eventData?.payload || {};
 
-  const handleDateChange = (date: Date) => setSelectedDate(date);
+  const handleDateChange = (value: Value) => {
+    if (value instanceof Date) {
+      setSelectedDate(value);
+    } else if (Array.isArray(value)) {
+      // if range selection, take first date (or handle differently if needed)
+      setSelectedDate(value[0]);
+    } else {
+      setSelectedDate(null);
+    }
+  };
 
   const countdownRenderer = ({ days, hours }: CountdownRenderProps) => (
     <div className="flex items-center gap-4 text-3xl sm:text-4xl font-bold">
@@ -145,8 +155,8 @@ export default function EventsCalendar() {
           <div className="flex flex-col-reverse lg:flex-row gap-5 bg-white text-black p-4">
             <Calendar
               onChange={handleDateChange}
-              value={selectedDate} // bind to selectedDate, initially null
-              defaultValue={null} // explicitly tell Calendar no default
+              value={selectedDate}
+              defaultValue={null}
               tileClassName={({ date }) =>
                 selectedDate &&
                 date.toDateString() === selectedDate.toDateString()
