@@ -46,6 +46,18 @@ const EventApi = Api.injectEndpoints({
       }),
       providesTags: (result, error, slug) => [{ type: "Event", id: slug }],
     }),
+    handleFindUpcoming: builder.query<any, any>({
+      query: () => ({
+        url: `/event/find-upcoming`,
+        method: "GET",
+      }),
+    }),
+    handleFindByEventStartDate: builder.query<any, any>({
+      query: (eventStartDate) => ({
+        url: `/event/find-by-event-start-date/${eventStartDate}`,
+        method: "GET",
+      }),
+    }),
 
     handleFindSingleEventWithPopulate: builder.query<any, any>({
       query: (slug) => ({
@@ -126,6 +138,8 @@ export const {
   useHandleCreateEventMutation,
   useHandleFindEventQuery,
   useHandleFindSingleEventQuery,
+  useHandleFindUpcomingQuery,
+  useHandleFindByEventStartDateQuery,
   useHandleFindSingleEventWithPopulateQuery,
   useHandleUpdateEventMutation,
   useHandleUpdateEventStatusMutation,

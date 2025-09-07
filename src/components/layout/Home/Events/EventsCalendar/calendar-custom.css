@@ -1,0 +1,56 @@
+/* calendar-custom.css */
+
+/* overall calendar container */
+.react-calendar {
+  border: none;
+  background: white;
+  border-radius: 8px;
+  padding: 8px;
+  font-family: "Inter", sans-serif;
+}
+
+/* navigation (month + arrows) */
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* weekdays (Su, Mo, etc.) */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+/* each tile (day cell) */
+.react-calendar__tile {
+  padding: 12px 0;
+  text-align: center;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* hover effect */
+.react-calendar__tile:hover {
+  background: rgba(0, 17, 88, 0.1);
+  cursor: pointer;
+}
+
+/* active (selected) date */
+.react-calendar__tile--active {
+  background: #1d4ed8;
+  color: white;
+  border-radius: 6px;
+}
+
+
+/* today's date outline */
+.react-calendar__tile--now {
+  border: none; /* remove today's outline */
+}
