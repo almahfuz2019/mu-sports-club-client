@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
                 width={500}
                 height={200}
                 src="/images/logo.svg"
-                alt="Royalty Chauffeurs"
+                alt="logo"
                 className="h-12 md:h-14 w-fit"
               />
             </Link>
