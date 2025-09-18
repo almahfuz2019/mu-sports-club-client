@@ -2,8 +2,6 @@
 
 import { useHandleFindDashboardOverviewQuery } from "@/Redux/features/dashboard/dashboardApi";
 import {
-  Loader2,
-  AlertCircle,
   Award,
   Calendar,
   Bell,
@@ -29,9 +27,11 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import DashboardSkeleton from "./DashboardSkeleton";
+import DashboardError from "./DashboardError";
 
 export default function Dashboard() {
-  const { data, isLoading, isFetching, isError, error } =
+  const { data, isLoading, isFetching, isError, error, refetch } =
     useHandleFindDashboardOverviewQuery({});
   const overview = data?.payload;
 
@@ -47,16 +47,12 @@ export default function Dashboard() {
 
       {/* Loading & Error */}
       {isLoading || isFetching ? (
-        <div className="flex justify-center items-center py-20">
-          <Loader2 className="h-10 w-10 animate-spin text-blue-500" />
-        </div>
+        <DashboardSkeleton />
       ) : isError ? (
-        <div className="flex items-center space-x-2 p-4 border rounded-lg text-red-500 bg-red-50">
-          <AlertCircle className="h-5 w-5" />
-          <p>
-            {(error as any)?.data?.message || "Failed to load dashboard data."}
-          </p>
-        </div>
+        <DashboardError
+          message={(error as any)?.data?.message}
+          onRetry={() => refetch()} // if your query has refetch
+        />
       ) : (
         <>
           {/* === Quick Counts === */}
